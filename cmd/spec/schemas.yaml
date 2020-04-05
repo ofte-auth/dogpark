@@ -1,0 +1,206 @@
+v1.AAGUID:
+  properties:
+    id:
+      type: string
+    label:
+      type: string
+    metadata:
+      format: byte
+      type: string
+    state:
+      type: string
+  type: object
+v1.Key:
+  properties:
+    aaguid:
+      type: string
+    attestationType:
+      type: string
+    caKey:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        fidoKeyId:
+          format: byte
+          type: string
+        id:
+          format: byte
+          type: string
+        modifiedAt:
+          format: date-time
+          type: string
+        principalId:
+          format: byte
+          type: string
+        raw:
+          format: byte
+          type: string
+      type: object
+    certCommonName:
+      type: string
+    certOrganization:
+      type: string
+    certSerial:
+      format: int64
+      type: integer
+    createdAt:
+      format: date-time
+      type: string
+    id:
+      format: byte
+      type: string
+    lastUsed:
+      format: date-time
+      type: string
+    modifiedAt:
+      format: date-time
+      type: string
+    nonce:
+      format: int64
+      type: integer
+    notValidAfter:
+      format: date-time
+      type: string
+    notValidBefore:
+      format: date-time
+      type: string
+    principalId:
+      format: byte
+      type: string
+    publicKey:
+      format: byte
+      type: string
+    state:
+      type: string
+    username:
+      type: string
+  type: object
+v1.Log:
+  properties:
+    action:
+      type: string
+    city:
+      type: string
+    country:
+      type: string
+    createdAt:
+      format: date-time
+      type: string
+    data:
+      type: string
+    error:
+      type: string
+    fidoAAGUID:
+      type: string
+    fidoKeyId:
+      format: byte
+      type: string
+    group:
+      type: string
+    id:
+      format: int64
+      type: integer
+    ipAaddr:
+      type: string
+    latitude:
+      type: number
+    longitude:
+      type: number
+    principalId:
+      format: byte
+      type: string
+    principalUsername:
+      type: string
+    region:
+      type: string
+    sessionId:
+      type: string
+    userAgent:
+      type: string
+  type: object
+v1.Principal:
+  properties:
+    createdAt:
+      format: date-time
+      type: string
+    displayName:
+      type: string
+    fidoKeys:
+      items:
+        properties:
+          aaguid:
+            type: string
+          attestationType:
+            type: string
+          caKey:
+            properties:
+              createdAt:
+                format: date-time
+                type: string
+              fidoKeyId:
+                format: byte
+                type: string
+              id:
+                format: byte
+                type: string
+              modifiedAt:
+                format: date-time
+                type: string
+              principalId:
+                format: byte
+                type: string
+              raw:
+                format: byte
+                type: string
+            type: object
+          certCommonName:
+            type: string
+          certOrganization:
+            type: string
+          certSerial:
+            format: int64
+            type: integer
+          createdAt:
+            format: date-time
+            type: string
+          id:
+            format: byte
+            type: string
+          lastUsed:
+            format: date-time
+            type: string
+          modifiedAt:
+            format: date-time
+            type: string
+          nonce:
+            format: int64
+            type: integer
+          notValidAfter:
+            format: date-time
+            type: string
+          notValidBefore:
+            format: date-time
+            type: string
+          principalId:
+            format: byte
+            type: string
+          publicKey:
+            format: byte
+            type: string
+          state:
+            type: string
+          username:
+            type: string
+        type: object
+      type: array
+    icon:
+      type: string
+    id:
+      format: byte
+      type: string
+    state:
+      type: string
+    username:
+      type: string
+  type: object

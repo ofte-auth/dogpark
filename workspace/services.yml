@@ -1,0 +1,122 @@
+version: '2.1'
+
+services:
+
+  etcd:
+    image: quay.io/coreos/etcd:v3.3.9
+    hostname: etcd
+    container_name: ofte_etcd
+    command:
+      - etcd
+      - --data-dir=/data
+      - --name=etcd01
+      - --listen-client-urls=http://0.0.0.0:2379
+      - --listen-peer-urls=http://0.0.0.0:2380
+      - --advertise-client-urls=http://127.0.0.1:2379
+      - --initial-advertise-peer-urls=http://127.0.0.1:2380
+      - --initial-cluster=etcd01=http://127.0.0.1:2380
+      - --auto-compaction-mode=revision 
+      - --auto-compaction-retention=1000
+
+  postgres:
+    image: registry.gitlab.com/ofte/docker-registry/postgres:latest
+    hostname: postgres
+    container_name: ofte_postgres
+    ports:
+      - 5432:5432
+    environment:
+      - OFTE_DB_USER=ofte
+      - OFTE_DB_PASSWORD
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  migrate:
+    image: registry.gitlab.com/ofte/docker-registry/ofte-migrate-cmd:latest
+    environment:
+      - OFTE_DB_HOST=postgres
+      - OFTE_DB_PORT=5432
+      - OFTE_DB_NAME=ofte
+      - OFTE_DB_USER=ofte
+      - OFTE_DB_PASSWORD
+      - OFTE_DB_SSLMODE=require
+    depends_on:
+      - postgres
+
+  auth-service:
+    image: registry.gitlab.com/ofte/docker-registry/ofte-auth-service:latest
+    hostname: auth-service
+    container_name: ofte_auth_service
+    ports:
+      - 2357:2357
+    environment:
+      - OFTE_DB_HOST=postgres
+      - OFTE_DB_PORT=5432
+      - OFTE_DB_NAME=ofte
+      - OFTE_DB_USER=ofte
+      - OFTE_DB_PASSWORD
+      - OFTE_DB_SSLMODE=require
+      - OFTE_KV_ENDPOINTS=http://etcd:2379
+      - OFTE_HTTP_PORT=2357
+      - OFTE_CORS_ALLOWED_ORIGINS=*
+      - OFTE_TLS_CERTIFICATE_FILE=/srv/certs/localhost.pem
+      - OFTE_TLS_PRIVATE_KEY_FILE=/srv/certs/localhost-key.pem
+      - OFTE_RP_DISPLAY_NAME=Ofte Demo
+      - OFTE_RP_ID=localhost
+      - OFTE_RP_ORIGIN=https://localhost:8888
+      - OFTE_RP_ICON=https://ofte.io/img/ofte-logo.svg
+      - OFTE_FIDO_MDS_TOKEN
+      - OFTE_IPSTACK_ACCESS_KEY
+    depends_on:
+      - migrate
+      - etcd
+    volumes:
+      # mount the current directory (for pems)
+      - ./:/srv/certs
+
+  admin-service:
+    image: registry.gitlab.com/ofte/docker-registry/ofte-admin-service:latest
+    hostname: admin-service
+    container_name: ofte_admin_service
+    ports:
+      - 2358:2358
+    environment:
+      - OFTE_DB_HOST=postgres
+      - OFTE_DB_PORT=5432
+      - OFTE_DB_NAME=ofte
+      - OFTE_DB_USER=ofte
+      - OFTE_DB_PASSWORD
+      - OFTE_DB_SSLMODE=require
+      - OFTE_KV_ENDPOINTS=http://etcd:2379
+      - OFTE_HTTP_PORT=2358
+      - OFTE_CORS_ALLOWED_ORIGINS=*
+      - OFTE_TLS_CERTIFICATE_FILE=/srv/certs/localhost.pem
+      - OFTE_TLS_PRIVATE_KEY_FILE=/srv/certs/localhost-key.pem
+      - OFTE_IPSTACK_ACCESS_KEY
+    depends_on:
+      - migrate
+      - etcd
+    volumes:
+      # mount the current directory (for pems)
+      - ./:/srv/certs
+
+  admin-demo-service:
+    image: registry.gitlab.com/ofte/docker-registry/ofte-admin-demo:latest
+    hostname: admin-demo
+    container_name: ofte_admin_demo
+    ports:
+      - 2359:2359
+    environment:
+      - PORT=2359
+      # this must point to the *public* URL of the admin-service
+      - OFTE_ADMIN_ENDPOINT=https://localhost:2358
+      - STATIC_FILES_LOCATION=/srv/web-app
+      - CERTIFICATE_FILE=/srv/certs/localhost.pem
+      - KEY_FILE=/srv/certs/localhost-key.pem      
+    depends_on:
+      - admin-service
+    volumes:
+      # mount the current directory (for pems)
+      - ./:/srv/certs
+
+volumes: 
+  pgdata:
