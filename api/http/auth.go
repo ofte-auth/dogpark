@@ -59,7 +59,7 @@ func NewAuthHandler(ctx context.Context, options ...func(*Handler) error) (*Auth
 // Note that there is no first factor authn/z employed here.
 //
 // Suggestions:
-// - restrict the `cors_allowed_origins` to your webapp in which first factor authn is occuring
+// - restrict the `cors_allowed_origins` to your webapp in which first factor authn is occurring
 // - add your own authz middleware that checks authn header for valid session (and add to client)
 func (handler *AuthHandler) Init() {
 	r := chi.NewRouter()

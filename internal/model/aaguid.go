@@ -15,11 +15,11 @@ import (
 // See https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html
 //
 // You can control whitelisting and blacklisting of AAGUIDs by updating an AAGUID's
-// `State` variable. For instance, to block a AAGUID, update the a record's State variable
+// `State` variable. For instance, to block a AAGUID, update the record's State variable
 // to 'revoked'. This will prevent any authenticator with that AAGUID from authenticating.
 // To whitelist one or more AAGUIDs, update a record's State variable to 'active'. Once one or more
-// records have an 'active' State a whitelist is, in effect, created; authenticators with other AAGUIDs
-// will not be able to authenticate. If `State` is empty or `issued`, the authenticator is neither explictly
+// records have an 'active' State, a whitelist is, in effect, created; authenticators with other AAGUIDs
+// will not be able to authenticate. If `State` is empty or `issued`, the authenticator is neither explicitly
 // blacklisted nor whitelisted.
 type AAGUID struct {
 	ID       string `json:"id"`

@@ -159,7 +159,7 @@ In order to deploy somewhere other than localhost, you'll need to set these envi
 In the [workspace/services.yml](workspace/services.yml) file, you can review all the environment variables in use.
 
 ## Auditing
-The Admin Service REST API offers access to Dogpark auditing. All actions are logged and be retrieved by various attributes (see the [Admin REST API documentation](https://online.swagger.io/?url=https://raw.githubusercontent.com/ofte-auth/dogpark/master/cmd/spec/admin.yaml)). In addition to this, you can supply a Message Broker (via the OptionMessageBroker) to the Services that implements the go-micro [Broker Interface](https://github.com/micro/go-micro/v2/broker). If present, all audit entries will also be sent through the broker.
+The Admin Service REST API offers access to Dogpark auditing. All actions are logged and can be retrieved by various attributes (see the [Admin REST API documentation](https://online.swagger.io/?url=https://raw.githubusercontent.com/ofte-auth/dogpark/master/cmd/spec/admin.yaml)). In addition to this, you can supply a Message Broker (via the OptionMessageBroker) to the Services that implements the go-micro [Broker Interface](https://github.com/micro/go-micro/v2/broker). If present, all audit entries will also be sent through the broker.
 
 ## Dependencies
 * golang v1.13+
