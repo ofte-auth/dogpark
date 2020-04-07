@@ -5,7 +5,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/stretchr/testify/require"
 )
 
@@ -33,5 +32,4 @@ func Test_IPStackImpl(t *testing.T) {
 	entry, err := resolver.Resolve("70.20.56.211")
 	require.NoError(t, err)
 	require.Equal(t, "United States", entry.Country)
-	spew.Dump(entry)
 }

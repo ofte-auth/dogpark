@@ -6,7 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
@@ -105,7 +104,6 @@ func Test_ETCDWatch(t *testing.T) {
 	go func() {
 		for {
 			result := <-resultChan
-			spew.Dump(result)
 			if result.Type == OperationTypeDELETE {
 				done <- true
 			} else if result.Type == OperationTypePUT {
