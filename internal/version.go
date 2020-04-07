@@ -7,8 +7,8 @@ import (
 var (
 	name      string = "Ofte Dogpark"
 	version   string = "v0.9.0"
-	buildDate string = ""
-	commit    string = ""
+	buildDate string
+	commit    string
 )
 
 // Version returns the version string.
