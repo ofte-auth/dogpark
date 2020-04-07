@@ -1,2 +1,4 @@
 /workspace/.env
 **/builds
+/workspace/services-ofte.yml
+/Makefile.ofte
