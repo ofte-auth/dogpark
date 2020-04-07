@@ -1,12 +1,12 @@
 info:
   license:
     name: MIT
-    url: 'https://github.com/ofte-auth/dogpark/LICENSE.md'
+    url: 'https://github.com/ofte-auth/dogpark/LICENSE'
   title: Ofte Dogpark Admin
   version: 0.9.0
   contact:
     email: info@ofte.io
-  termsOfService: 'https://github.com/ofte-auth/dogpark/LICENSE.md'
+  termsOfService: 'https://github.com/ofte-auth/dogpark/LICENSE'
   description: |
     The Ofte Dogpark Admin REST API.
     
