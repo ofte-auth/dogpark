@@ -22,8 +22,9 @@ services:
     image: registry.gitlab.com/ofte/docker-registry/postgres:latest
     hostname: postgres
     container_name: ofte_postgres
-    ports:
-      - 5432:5432
+    # no ports exposed outside of container, uncomment next 2 lines to connect from outside
+    #ports:
+      # - 5432:5432
     environment:
       - OFTE_DB_USER=ofte
       - OFTE_DB_PASSWORD
