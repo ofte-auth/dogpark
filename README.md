@@ -180,7 +180,7 @@ The Admin Service REST API offers access to Dogpark auditing. All actions are lo
 An example VueJS-based web application that uses Google OAUTH for first factor authentication and Ofte Dogpark for FIDO-based second factor authentication is available at [this repo](https://gitlab.com/ofte/example-portal-vuejs-golang/-/tree/ofte-dogpark).
 
 ## Contributing
-Contributions are most welcome to this project should follow the standard git model:
+Contributions are most welcome to this project and should follow the standard git model:
 
 	fork ➝ feature-branch ➝ pull-request 
 	
@@ -188,7 +188,7 @@ Please base your pull request against our master branch and be sure to include d
 
 ## Resources
 
-https://webauthn.guide
-https://fidoalliance.org
-https://www.okta.com/security-blog/2019/05/the-ultimate-guide-to-webauthn-registration-and-auth-flows/
+- https://webauthn.guide
+- https://fidoalliance.org
+- https://www.okta.com/security-blog/2019/05/the-ultimate-guide-to-webauthn-registration-and-auth-flows/
 
