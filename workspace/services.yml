@@ -31,7 +31,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   migrate:
-    image: registry.gitlab.com/ofte/docker-registry/ofte-migrate-cmd:latest
+    image: dogpark-migrate-cmd:latest
     environment:
       - OFTE_DB_HOST=postgres
       - OFTE_DB_PORT=5432
@@ -43,7 +43,7 @@ services:
       - postgres
 
   auth-service:
-    image: registry.gitlab.com/ofte/docker-registry/ofte-auth-service:latest
+    image: dogpark-auth-service:latest
     hostname: auth-service
     container_name: ofte_auth_service
     ports:
@@ -74,7 +74,7 @@ services:
       - ./:/srv/certs
 
   admin-service:
-    image: registry.gitlab.com/ofte/docker-registry/ofte-admin-service:latest
+    image: dogpark-admin-service:latest
     hostname: admin-service
     container_name: ofte_admin_service
     ports:
@@ -96,7 +96,7 @@ services:
       - migrate
       - etcd
     volumes:
-      # mount the current directory (for pems)
+      # mount the current directory (for Certs)
       - ./:/srv/certs
 
   admin-demo-service:
@@ -115,7 +115,7 @@ services:
     depends_on:
       - admin-service
     volumes:
-      # mount the current directory (for pems)
+      # mount the current directory (for Certs)
       - ./:/srv/certs
 
 volumes: 
