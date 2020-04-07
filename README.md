@@ -92,7 +92,7 @@ ofte.loginKey(principal.username)
 ```
 
 #### Auth Service
-The Dogpark Auth Service exposes a REST API that handles the creation of principals, and the registration and authetication of FIDO keys. If using the Dogpark JS (described above), there's no need to interact with this service.
+The Dogpark Auth Service exposes a REST API that handles the creation of principals, and the registration and authentication of FIDO keys. If using the Dogpark JS (described above), there's no need to interact with this service.
 
 The Service is designed to run as a micro-service. It is stateless therefore multiple instances can be deployed as needed. Both this Service and the Admin Service are easily deployed using Docker, see #Deploying below. Both services expose a `/healthz` endpoint for container orchestration.
 
