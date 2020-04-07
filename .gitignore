@@ -2,3 +2,4 @@
 **/builds
 /workspace/services-ofte.yml
 /Makefile.ofte
+/.vscode
