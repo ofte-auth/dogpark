@@ -4,6 +4,8 @@
 
 A platform to easily integrate and manage the FIDO keys used in any organization.
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/ofte-auth/dogpark)](https://goreportcard.com/report/github.com/ofte-auth/dogpark)
+
 ## Introduction
 
 Using a FIDO-compatible second factor authentication mechanism to better secure your web application is a **[good idea](https://fidoalliance.org/time-stop-using-sms-2fa-apps-two-factor-authentication/)**. But integrating all the Javascript and backend code necessary to enable FIDO 2nd factor authentication can be a daunting task. Even if you're able to integrate it all, the ability to manage and audit the FIDO keys in use in your organization is yet another set of functionality you'll have to create.
