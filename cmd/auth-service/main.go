@@ -30,7 +30,7 @@ func main() {
 	ctx := cli.Context()
 
 	err = util.Retry(10, 250*time.Millisecond, func() error {
-		dbConn, err = db.GetConnection(util.AllConfigSettings())
+		dbConn, err = db.GetConnection()
 		if err != nil {
 			log.WithError(err).WithField("service", "auth").Warning("Error connecting to db, retrying")
 		}

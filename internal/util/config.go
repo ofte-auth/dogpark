@@ -12,8 +12,3 @@ func InitConfig() {
 	viper.SetEnvPrefix("ofte")
 	viper.AutomaticEnv()
 }
-
-// AllConfigSettings returns all flags, configs and environment variables.
-func AllConfigSettings() map[string]interface{} {
-	return viper.AllSettings()
-}

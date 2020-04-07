@@ -8,12 +8,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/ofte-auth/dogpark/internal/geo"
-
 	"github.com/fraugster/cli"
 	"github.com/ofte-auth/dogpark/api/http"
 	"github.com/ofte-auth/dogpark/internal"
 	"github.com/ofte-auth/dogpark/internal/db"
+	"github.com/ofte-auth/dogpark/internal/geo"
 	"github.com/ofte-auth/dogpark/internal/store"
 	"github.com/ofte-auth/dogpark/internal/util"
 	log "github.com/sirupsen/logrus"
@@ -31,7 +30,7 @@ func main() {
 	ctx := cli.Context()
 
 	err = util.Retry(10, 250*time.Millisecond, func() error {
-		dbConn, err = db.GetConnection(util.AllConfigSettings())
+		dbConn, err = db.GetConnection()
 		if err != nil {
 			log.WithError(err).WithField("service", "auth").Warning("Error connecting to db, retrying")
 		}

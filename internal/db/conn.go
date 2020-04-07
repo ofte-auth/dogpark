@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/pkg/errors"
+	config "github.com/spf13/viper"
 
 	// implicitly load postgres driver
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -25,23 +25,14 @@ var paramKeys map[string]string = map[string]string{
 }
 
 // GetConnection opens the DB via gorm. The returned handle is safe for concurrent and reuse.
-func GetConnection(params map[string]interface{}) (DB, error) {
-	var (
-		err              error
-		connectionParams strings.Builder
-	)
+func GetConnection() (DB, error) {
+	var connectionParams strings.Builder
 
-	for k, v := range params {
-		if _, ok := paramKeys[k]; !ok {
-			continue
-		}
-		value, ok := v.(string)
-		if !ok {
-			return nil, errors.Errorf("converting parameter %s", k)
-		}
-		_, err = connectionParams.WriteString(fmt.Sprintf("%s=%s ", paramKeys[k], value))
-		if err != nil {
-			return nil, err
+	for k, v := range paramKeys {
+		value := config.GetString(k)
+
+		if len(value) > 0 {
+			_, _ = connectionParams.WriteString(fmt.Sprintf("%s=%s ", v, value))
 		}
 	}
 	return gorm.Open("postgres", connectionParams.String())
